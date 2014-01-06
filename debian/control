@@ -1,0 +1,11 @@
+Source: pipresents
+Maintainer: Tobias Jaehnel <tjaehnel@gmail.com>
+Section: misc
+Standards-Version: 3.9.5
+Build-Depends: debhelper (>= 9)
+
+Package: pipresents
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: presentation software for Raspberry Pi
+
