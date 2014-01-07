@@ -19,8 +19,8 @@ prepare-package:
 	@echo
 	@echo "-------- Now make changes to ${PIPSRCDIR} if necessary -----------"
 
-restore-package:
-	dpkg-source -x source-package/pipresents-${PIPVERSION}.dsc ${PIPSRCDIR}
+extract-source-package:
+	dpkg-source -x source-package/pipresents_${PIPVERSION}.dsc ${PIPSRCDIR}
 
 build-source-package:
 	cd ${PIPSRCDIR} && debuild -us -uc -S
@@ -28,8 +28,9 @@ build-source-package:
 	mv pipresents_* source-package
 	cp source-package/pipresents_${PIPVERSION}.orig.tar.gz .
 
+# build binary package from source package
 build-binary-package:
-	dpkg-source -x source-package/pipresents-${PIPVERSION}.dsc tmp
+	dpkg-source -x source-package/pipresents_${PIPVERSION}.dsc tmp
 	cd tmp && debuild -us -uc -b 
 	mkdir binary-package
 	mv pipresents_* binary-package
