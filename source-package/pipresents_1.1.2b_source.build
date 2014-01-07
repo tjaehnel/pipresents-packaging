@@ -1,0 +1,24 @@
+ dpkg-buildpackage -rfakeroot -d -us -uc -S
+dpkg-buildpackage: source package pipresents
+dpkg-buildpackage: source version 1.1.2b
+dpkg-buildpackage: source changed by Tobias Jaehnel <tjaehnel@gmail.com>
+ dpkg-source --before-build pipresents-1.1.2b
+ fakeroot debian/rules clean
+dh clean
+   dh_testdir
+   dh_auto_clean
+   dh_clean
+ dpkg-source -b pipresents-1.1.2b
+dpkg-source: info: using source format `3.0 (quilt)'
+dpkg-source: info: building pipresents using existing ./pipresents_1.1.2b.orig.tar.gz
+dpkg-source: info: building pipresents in pipresents_1.1.2b.debian.tar.gz
+dpkg-source: info: building pipresents in pipresents_1.1.2b.dsc
+ dpkg-genchanges -S >../pipresents_1.1.2b_source.changes
+dpkg-genchanges: warning: missing Priority for source files
+dpkg-genchanges: including full source code in upload
+ dpkg-source --after-build pipresents-1.1.2b
+dpkg-buildpackage: full upload (original source is included)
+Now running lintian...
+W: pipresents source: non-native-package-with-native-version
+W: pipresents source: newer-standards-version 3.9.5 (current is 3.9.4)
+Finished running lintian.
