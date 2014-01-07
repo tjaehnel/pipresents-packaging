@@ -1,5 +1,11 @@
-pipresents (1.0-1) UNRELEASED; urgency=low
+pipresents (1.1.2b) UNRELEASED; urgency=low
+
+  * First packaged pipresent release
+
+ -- Tobias Jaehnel <tobias@PC67>  Tue, 07 Jan 2014 12:27:11 +0000
+
+pipresents (1.0-1) raring; urgency=low
 
   * Initial release.
 
- -- Tobias Jaehnel <tjaehnel@gmail.com>  Mon, 06 Jan 2014 15:06:44 +0000
+ -- Tobias Jaehnel <tobias@PC67>  Tue, 07 Jan 2014 12:27:01 +0000
