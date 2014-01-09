@@ -1,0 +1,187 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          pipresents
+# Required-Start:    $local_fs lightdm 
+# Required-Stop:     lightdm
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Display package for museums & visitor centres
+# Description:       Pi Presents is a presentation application
+#                    intended for Museums and Visitor Centres.
+### END INIT INFO
+
+# Author: Tobias Jaehnel <tjaehnel@gmail.com>
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+DESC="Display package for museums & visitor centres"             
+NAME=pipresents
+#DAEMON=/usr/share/pipresents/pipresents
+DAEMON=/home/pi/pipresents/pipresents/pipresents
+PYTHONEXEC=$(type python | cut --fields=3 -d ' ')
+
+PIDFILE=/var/run/$NAME.pid
+SCRIPTNAME=/etc/init.d/$NAME
+
+PPHOME="/usr/share/pipresents/pp_home"
+PROFILE="ppt_blank"
+PIPUSER=pi
+WAITFORX_RETRIES=20
+WAITFORX_SLEEPBETWEENRETRIES=1
+
+
+# Exit if the package is not installed
+[ -x $DAEMON ] || exit 0
+
+# Read configuration variable file if it is present
+[ -r /etc/default/$NAME ] && . /etc/default/$NAME
+
+# Load the VERBOSE setting and other rcS variables
+. /lib/init/vars.sh
+
+# Define LSB log_* functions.
+# Depend on lsb-base (>= 3.0-6) to ensure that this file is present.
+. /lib/lsb/init-functions
+
+DAEMON_ARGS="-f bottom -b -o $PPHOME -p $PROFILE -d"
+CHDIR=$PPHOME/pp_home/pp_profiles/$PROFILE
+
+VERBOSE=yes
+
+#
+# Function that waits for the X-Server to be available
+# Return
+#   0 if X-Server is running
+#   1 if X-Server did not become ready
+#
+wait_for_x() {
+    export DISPLAY=:0
+    RETRIES=$WAITFORX_RETRIES
+    while [ $RETRIES -gt 0 ]
+    do
+        su $PIPUSER -c 'xset q >/dev/null 2>&1'
+        RETVAL=$?
+        if [ $RETVAL -eq 0 ]
+        then
+            return 0
+        fi
+        RETRIES=$(expr $RETRIES - 1)
+        sleep $WAITFORX_SLEEPBETWEENRETRIES
+        log_progress_msg $RETRIES
+    done
+
+    return 1
+}
+
+#
+# Function that starts the daemon/service
+#
+# Return
+#   0 if daemon has been started
+#   1 if daemon was already running
+#   2 if daemon could not be started
+#
+do_start()
+{
+    # check if the process is already running
+    start-stop-daemon --start --pidfile $PIDFILE --exec $PYTHONEXEC --startas $DAEMON --quiet --test || return 1
+    # try to start daemon
+    start-stop-daemon --start --chuid $PIPUSER --background --make-pidfile --pidfile $PIDFILE -d $CHDIR --exec $DAEMON -- $DAEMON_ARGS
+    if [ $? -ne 0 ]
+    then
+        rm $PIDFILE
+        return 2
+    fi
+    # check if the process is running now
+    sleep 2
+
+    start-stop-daemon --start --pidfile $PIDFILE --exec /usr/bin/python --startas $DAEMON --test --quiet
+    if [ $? -ne 1 ]
+    then
+        rm $PIDFILE
+        return 2
+    fi
+    return 0
+}
+
+#
+# Function that stops the daemon/service
+# Return
+#   0 if daemon has been stopped
+#   1 if daemon was already stopped
+#   2 if daemon could not be stopped
+#
+do_stop()
+{
+    # try stopping the daemon
+    start-stop-daemon --stop --retry=TERM/30/KILL/5 --pidfile $PIDFILE --quiet 
+    RETVAL="$?"
+    [ "$RETVAL" -gt 1 ] && return 2
+
+    rm -f $PIDFILE
+    return "$RETVAL"
+}
+
+
+case "$1" in
+  start)
+    [ "$VERBOSE" != no ] && log_daemon_msg "Waiting for X-Server to become ready..."
+    wait_for_x
+    if [ $? -ne 0 ]
+    then
+        log_end_msg 1
+        [ "$VERBOSE" != no ] && log_failure_msg "X-Server did not become ready, giving up"
+    else
+        log_end_msg 0
+        [ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC " "$NAME"
+        do_start
+        case "$?" in
+            0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+            2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+        esac
+    fi
+  ;;
+
+  stop)
+    [ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
+    do_stop
+    case "$?" in
+        0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+        2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+    esac
+    ;;
+
+  status)
+    status_of_proc -p $PIDFILE "$DAEMON" "$NAME" && exit 0 || exit $?
+    ;;
+
+  restart|force-reload)
+    log_daemon_msg "Restarting $DESC" "$NAME"
+    do_stop
+    case "$?" in
+      0|1)
+        log_daemon_msg "Waiting for X-Server to become ready..."
+        wait_for_x
+        if [ $? -ne 0 ]
+        then
+            log_end_msg 1
+            log_failure_msg "X-Server did not become ready, giving up"
+        else
+            do_start
+            case "$?" in
+                0) log_end_msg 0 ;;
+                1) log_end_msg 1 ;; # Old process is still running
+                *) log_end_msg 1 ;; # Failed to start
+            esac
+        fi
+        ;;
+      *)
+        # Failed to stop
+        log_end_msg 1
+        ;;
+    esac
+    ;;
+  *)
+    echo "Usage: $SCRIPTNAME {start|stop|status|restart|force-reload}" >&2
+    exit 3
+    ;;
+esac
+
