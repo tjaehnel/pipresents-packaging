@@ -3,7 +3,7 @@ PIPVERSION=1.1.2b
 PACKAGEREVISION=1
 
 PIPSRCTARBALL=pipresents_${PIPVERSION}.orig.tar.gz
-PIPSRCDIR=pipresents-${PIPVERSION}
+PIPSRCDIR=pipresents-rsync-${PIPVERSION}
 
 .PHONY: download prepare-package extract-source-package source-package binary-package clean
 download:
@@ -30,16 +30,16 @@ source-package:
 	-rm -r source-package
 	mkdir source-package
 	mv pipresents_* source-package
-	cp source-package/pipresents_${PIPVERSION}.orig.tar.gz .
+	cp source-package/${PIPSRCTARBALL} .
 
 # build binary package from source package
 binary-package:
-	dpkg-source -x source-package/pipresents_${PIPVERSION}-${PACKAGEREVISION}.dsc tmp
+	dpkg-source -x source-package/pipresents-rsync_${PIPVERSION}-${PACKAGEREVISION}.dsc tmp
 	cd tmp && debuild -us -uc -b 
 	-rm -r binary-package
 	mkdir binary-package
 	mv pipresents_* binary-package
-	cp binary-package/pipresents_${PIPVERSION}.orig.tar.gz .
+	cp binary-package/${PIPSRCTARBALL} .
 	rm -rf tmp
 
 clean:

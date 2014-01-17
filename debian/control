@@ -1,12 +1,14 @@
-Source: pipresents
+Source: pipresents-rsync
 Maintainer: Tobias Jaehnel <tjaehnel@gmail.com>
 Section: misc
 Standards-Version: 3.9.5
 Build-Depends: debhelper (>= 9), lsb-base (>= 3.0-6)
 
-Package: pipresents
+Package: pipresents-rsync
 Architecture: all
 Priority: optional
-Depends: ${shlibs:Depends}, ${misc:Depends}, python-imaging, python-imaging-tk, x11-xserver-utils, unclutter
-Description: Display package for museums & visitor centres
+Depends: ${shlibs:Depends}, ${misc:Depends}, python-imaging, python-imaging-tk, x11-xserver-utils, unclutter, rsync
+Description: rsync presentation update enabled pipresents
  Presentation software for the Raspberry Pi
+ The init script contains extensions, so that it can update
+ presentations via rsync
