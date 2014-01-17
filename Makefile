@@ -4,6 +4,7 @@ PIPVERSION=1.1.2b
 PIPSRCTARBALL=pipresents_${PIPVERSION}.orig.tar.gz
 PIPSRCDIR=pipresents-${PIPVERSION}
 
+.PHONY: download prepare-package extract-source-package source-package binary-package clean
 download:
 	# download pipresents
 	wget ${TARBALLURL} -O - | tar xz
@@ -15,6 +16,7 @@ download:
 
 prepare-package:
 	tar xzf ${PIPSRCTARBALL}
+	-rm -r ${PIPSRCDIR}/debian
 	cp -rp debian ${PIPSRCDIR}
 	@echo
 	@echo "-------- Now make changes to ${PIPSRCDIR} if necessary -----------"
@@ -22,16 +24,18 @@ prepare-package:
 extract-source-package:
 	dpkg-source -x source-package/pipresents_${PIPVERSION}.dsc ${PIPSRCDIR}
 
-build-source-package:
+source-package:
 	cd ${PIPSRCDIR} && debuild -us -uc -S
+	-rm -r source-package
 	mkdir source-package
 	mv pipresents_* source-package
 	cp source-package/pipresents_${PIPVERSION}.orig.tar.gz .
 
 # build binary package from source package
-build-binary-package:
+binary-package:
 	dpkg-source -x source-package/pipresents_${PIPVERSION}.dsc tmp
 	cd tmp && debuild -us -uc -b 
+	-rm -r binary-package
 	mkdir binary-package
 	mv pipresents_* binary-package
 	cp binary-package/pipresents_${PIPVERSION}.orig.tar.gz .
@@ -41,4 +45,5 @@ clean:
 	-rm pipresents_*
 	-rm -r ${PIPSRCDIR}
 	-rm -r binary-package
-	-rm -rf tmp	
+	-rm -rf tmp
+

@@ -1,0 +1,5 @@
+# Defaults for pipresents initscript
+# sourced by /etc/init.d/pipresents
+
+PPHOME=/home/pi
+PROFILE=show1
