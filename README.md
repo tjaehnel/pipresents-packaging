@@ -12,7 +12,7 @@ To create the current version of the binary package from the checked in source p
  make binary-package
 
 If you want to release a new version of the package:
-*   Change version in the Makefile
+*   Change version and revision in the Makefile
 *   Build a source package from the newest sources from the internet
  make download
  make prepare-package

@@ -1,0 +1,28 @@
+Format: 1.8
+Date: Tue, 07 Jan 2014 12:27:11 +0000
+Source: pipresents
+Binary: pipresents
+Architecture: source
+Version: 1.1.2b-1
+Distribution: UNRELEASED
+Urgency: low
+Maintainer: Tobias Jaehnel <tjaehnel@gmail.com>
+Changed-By: Tobias Jaehnel <tjaehnel@gmail.com>
+Description: 
+ pipresents - Display package for museums & visitor centres
+Changes: 
+ pipresents (1.1.2b-1) UNRELEASED; urgency=low
+ .
+   * First packaged pipresent release
+Checksums-Sha1: 
+ d4c8353041abff9c3fa3aa4d907eebcee07d8b33 821 pipresents_1.1.2b-1.dsc
+ d142abf3648f3b4b3c09ade15188ec0fce114efc 275787 pipresents_1.1.2b.orig.tar.gz
+ a8ad24a1917a1617ac7f3aef2b54e592a2809888 2492 pipresents_1.1.2b-1.debian.tar.gz
+Checksums-Sha256: 
+ babedc782335ad10a5c7c82d2d8968bc7a63b1c851ebae9102e9371b21dbfa17 821 pipresents_1.1.2b-1.dsc
+ 32e5d9a8c1ea9a42b9b997f3cf1775f50b2d563bfe1490813a708fdf3bb2d833 275787 pipresents_1.1.2b.orig.tar.gz
+ b26a747a892278125b4665d48881f0dbf331c27d7e5f7eb2cb844e2b1f853491 2492 pipresents_1.1.2b-1.debian.tar.gz
+Files: 
+ f53293ba7880a84b57a1b4e9cc4afaa5 821 misc - pipresents_1.1.2b-1.dsc
+ 2b93428d8cacf9d19dff907934594b20 275787 misc - pipresents_1.1.2b.orig.tar.gz
+ 28c041470d6c583b01333469b2722528 2492 misc - pipresents_1.1.2b-1.debian.tar.gz

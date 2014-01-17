@@ -1,5 +1,6 @@
 TARBALLURL=https://github.com/KenT2/pipresents/tarball/master
 PIPVERSION=1.1.2b
+PACKAGEREVISION=1
 
 PIPSRCTARBALL=pipresents_${PIPVERSION}.orig.tar.gz
 PIPSRCDIR=pipresents-${PIPVERSION}
@@ -33,7 +34,7 @@ source-package:
 
 # build binary package from source package
 binary-package:
-	dpkg-source -x source-package/pipresents_${PIPVERSION}.dsc tmp
+	dpkg-source -x source-package/pipresents_${PIPVERSION}-${PACKAGEREVISION}.dsc tmp
 	cd tmp && debuild -us -uc -b 
 	-rm -r binary-package
 	mkdir binary-package
