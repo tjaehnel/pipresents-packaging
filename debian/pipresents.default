@@ -1,5 +1,10 @@
 # Defaults for pipresents initscript
 # sourced by /etc/init.d/pipresents
 
-PPHOME=/home/pi
 PROFILE=show1
+
+RSYNC_SSH_HOST=mysshhost.net
+RSYNC_SSH_USER=mysshuser
+RSYNC_REMOTE_DIR=/path/to/$PROFILE
+
+

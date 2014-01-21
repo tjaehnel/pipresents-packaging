@@ -1,8 +1,8 @@
 #!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          pipresents
-# Required-Start:    $local_fs $remote_fs lightdm 
-# Required-Stop:     $remote_fs lightdm
+# Required-Start:    $local_fs lightdm 
+# Required-Stop:     lightdm
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: Display package for museums & visitor centres
@@ -15,13 +15,14 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Display package for museums & visitor centres"             
 NAME=pipresents
 #DAEMON=/usr/share/pipresents/pipresents
-DAEMON=/home/pi/pipresents/pipresents/pipresents
+DAEMON=/usr/share/pipresents/pipresents
 PYTHONEXEC=$(type python | cut --fields=3 -d ' ')
 
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 
-PPHOME="/usr/share/pipresents/pp_home"
+PPHOME="/usr/share/pipresents"
+PROFILEDIR="$PPHOME/pp_home/pp_profiles"
 PROFILE="ppt_blank"
 PIPUSER=pi
 WAITFORX_RETRIES=20
@@ -42,9 +43,32 @@ WAITFORX_SLEEPBETWEENRETRIES=1
 . /lib/lsb/init-functions
 
 DAEMON_ARGS="-f bottom -b -o $PPHOME -p $PROFILE -d"
-CHDIR=$PPHOME/pp_home/pp_profiles/$PROFILE
+CHDIR=$PROFILEDIR/$PROFILE
+
+UPDATE_PROFILES_COMMAND="rsync -ave ssh --delete $RSYNC_SSH_USER@$RSYNC_SSH_HOST:$RSYNC_REMOTE_DIR $PROFILEDIR"
 
 VERBOSE=yes
+
+#
+# Fetch current profiles from server
+# return
+#   0 if no files changed
+#   1 if files changed
+#   2 if there was an error
+#
+fetch_profiles() {
+    CHANGED_FILES=$(su $PIPUSER -c "$UPDATE_PROFILES_COMMAND | head -n -3 | tail -n +2" )
+    RETVAL=$?
+    if [ $RETVAL -ne 0 ]
+    then
+        return 2
+    fi
+    if [ "a$CHANGED_FILES" != "a" ]
+    then
+        return 1
+    fi
+    return 0
+}
 
 #
 # Function that waits for the X-Server to be available
@@ -123,6 +147,17 @@ do_stop()
 
 case "$1" in
   start)
+    [ "$VERBOSE" != no ] && log_daemon_msg \
+        "Updating profiles via rsync..."
+    fetch_profiles
+    if [ $? -eq 2 ]
+    then
+        log_end_msg 1
+        [ "$VERBOSE" != no ] && log_failure_msg \
+            "Error fetching data from rsync server"
+    else
+        log_end_msg 0
+    fi
     [ "$VERBOSE" != no ] && log_daemon_msg "Waiting for X-Server to become ready..."
     wait_for_x
     if [ $? -ne 0 ]
@@ -179,6 +214,22 @@ case "$1" in
         ;;
     esac
     ;;
+  fetch)
+    fetch_profiles
+    ;;
+  update)
+    fetch_profiles
+    FILES_CHANGED=$?
+    if [ $FILES_CHANGED -eq 1 ]
+    then
+        log_success_msg "Files changed during update, restarting PiPresents"
+        stop
+        start
+    else
+        log_success_msg "No files changed - exiting"
+    fi
+    ;;
+
   *)
     echo "Usage: $SCRIPTNAME {start|stop|status|restart|force-reload}" >&2
     exit 3
