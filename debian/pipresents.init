@@ -14,8 +14,7 @@
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Display package for museums & visitor centres"             
 NAME=pipresents
-#DAEMON=/usr/share/pipresents/pipresents
-DAEMON=/home/pi/pipresents/pipresents/pipresents
+DAEMON=/usr/share/pipresents/pipresents
 PYTHONEXEC=$(type python | cut --fields=3 -d ' ')
 
 PIDFILE=/var/run/$NAME.pid

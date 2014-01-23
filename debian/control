@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 9), lsb-base (>= 3.0-6)
 Package: pipresents-rsync
 Architecture: all
 Priority: optional
-Depends: ${shlibs:Depends}, ${misc:Depends}, python-imaging, python-imaging-tk, x11-xserver-utils, unclutter, rsync
+Depends: ${shlibs:Depends}, ${misc:Depends}, python-imaging, python-imaging-tk, x11-xserver-utils, unclutter, rsync, cron
 Description: rsync presentation update enabled pipresents
  Presentation software for the Raspberry Pi
  The init script contains extensions, so that it can update
