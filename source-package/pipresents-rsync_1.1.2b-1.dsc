@@ -10,10 +10,10 @@ Package-List:
  pipresents-rsync deb misc optional
 Checksums-Sha1: 
  c953a64c1f56a154cc2f29d5ca09f38d6f61058a 275800 pipresents-rsync_1.1.2b.orig.tar.gz
- 5c810c490e72da830b9f9aeba7ee9738ad2b4479 2906 pipresents-rsync_1.1.2b-1.debian.tar.gz
+ efda55f6eb0dafa7da2a27fa8ef5c9439e873d99 2947 pipresents-rsync_1.1.2b-1.debian.tar.gz
 Checksums-Sha256: 
  8daf4a304cf4ffb6c3b2b39acbbbf0c956978dc333c5f7b8ec9c1cfc6cbc74ec 275800 pipresents-rsync_1.1.2b.orig.tar.gz
- 7f6c5f8bed3603bf786d24097e67ae90604028bb3a55c0dbd5c93c2fe0c02b00 2906 pipresents-rsync_1.1.2b-1.debian.tar.gz
+ e3056f80afcaf3a1589ed0f82f668d47c6af775bee37fb4c83be0e44e49fa345 2947 pipresents-rsync_1.1.2b-1.debian.tar.gz
 Files: 
  b76c8c78320e371e0569b9933a30efc5 275800 pipresents-rsync_1.1.2b.orig.tar.gz
- 34a10b3f31a7c434976900a1cbd82e70 2906 pipresents-rsync_1.1.2b-1.debian.tar.gz
+ 0b4a9210376d7820f25d795b9d072729 2947 pipresents-rsync_1.1.2b-1.debian.tar.gz

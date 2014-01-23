@@ -15,14 +15,14 @@ Changes:
  .
    * First packaged pipresent release
 Checksums-Sha1: 
- 467d0142feca5cb6ad76166549a49456ad0463c0 875 pipresents-rsync_1.1.2b-1.dsc
+ e00cff07d0199fae6f05ea2ce270a0e5b940bfd0 875 pipresents-rsync_1.1.2b-1.dsc
  c953a64c1f56a154cc2f29d5ca09f38d6f61058a 275800 pipresents-rsync_1.1.2b.orig.tar.gz
- 5c810c490e72da830b9f9aeba7ee9738ad2b4479 2906 pipresents-rsync_1.1.2b-1.debian.tar.gz
+ efda55f6eb0dafa7da2a27fa8ef5c9439e873d99 2947 pipresents-rsync_1.1.2b-1.debian.tar.gz
 Checksums-Sha256: 
- 1b96626839cf640f3d8e6102d08c85368cf31371470a3d6ce3a372338011546d 875 pipresents-rsync_1.1.2b-1.dsc
+ 7f52788ec2b9bbf1f41b582b64f995fde13bd7976ca20150b0b96dabcf8b8db1 875 pipresents-rsync_1.1.2b-1.dsc
  8daf4a304cf4ffb6c3b2b39acbbbf0c956978dc333c5f7b8ec9c1cfc6cbc74ec 275800 pipresents-rsync_1.1.2b.orig.tar.gz
- 7f6c5f8bed3603bf786d24097e67ae90604028bb3a55c0dbd5c93c2fe0c02b00 2906 pipresents-rsync_1.1.2b-1.debian.tar.gz
+ e3056f80afcaf3a1589ed0f82f668d47c6af775bee37fb4c83be0e44e49fa345 2947 pipresents-rsync_1.1.2b-1.debian.tar.gz
 Files: 
- b672a1079c38a33bfeca1c2775b9b1eb 875 misc - pipresents-rsync_1.1.2b-1.dsc
+ 948ba56906165ba32da80c8e8f1bdf33 875 misc - pipresents-rsync_1.1.2b-1.dsc
  b76c8c78320e371e0569b9933a30efc5 275800 misc - pipresents-rsync_1.1.2b.orig.tar.gz
- 34a10b3f31a7c434976900a1cbd82e70 2906 misc - pipresents-rsync_1.1.2b-1.debian.tar.gz
+ 0b4a9210376d7820f25d795b9d072729 2947 misc - pipresents-rsync_1.1.2b-1.debian.tar.gz

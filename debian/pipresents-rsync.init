@@ -1,8 +1,8 @@
 #!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          pipresents
-# Required-Start:    $local_fs lightdm 
-# Required-Stop:     lightdm
+# Required-Start:    $local_fs $remote_fs $network lightdm 
+# Required-Stop:     $local_fs $remote_fs $network lightdm
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: Display package for museums & visitor centres
