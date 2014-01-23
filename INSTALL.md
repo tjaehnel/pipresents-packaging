@@ -1,13 +1,13 @@
 Installation of pipresents-rsync
 ================================
 
-# What you need #
+### What you need ###
 *   the pipresents-rsync debian package
 *   useraccount on rsync capable ssh server with certificate login enabled
 *   keypair for SSH login (see below)
 
 
-# Operations to install and configure the package #
+### Operations to install and configure the package ###
 *   Make sure your raspberry pi start into X (raspi-config)
 *   Upload the debian package to the Raspberry Pi and install it as root
         # dpkg -i pipresenrs-rsync_<version>.deb
@@ -21,7 +21,7 @@ Installation of pipresents-rsync
     You HAVE TO do this once to accept the host key
 After restarting your Raspberry Pi it gets the presentation from the rsync server and runs it. It also check for updates if your show every minute.
 
-# Creating a keypair for passwordless SSH login #
+### Creating a keypair for passwordless SSH login ###
 *   Make sure that your remote server allows vertificate based
     logins for your desired user
 *   Create a keypair
