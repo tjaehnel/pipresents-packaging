@@ -7,6 +7,8 @@ PIPSRCTARBALL=${PACKAGENAME}_${PIPVERSION}.orig.tar.gz
 PIPSRCDIR=${PACKAGENAME}-${PIPVERSION}
 
 .PHONY: download prepare-package extract-source-package source-package binary-package clean
+all: extract-source-package binary-package
+
 download:
 	# download pipresents
 	wget ${TARBALLURL} -O - | tar xz
