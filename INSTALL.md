@@ -38,3 +38,4 @@ After restarting your Raspberry Pi it gets the presentation from the rsync serve
 *   You should now be able to login to your remote server without password
         # ssh -l <remote username> <ssh server>
 
+If something goes wrong: There are logfiles in /tmp and /usr/share/pipresents

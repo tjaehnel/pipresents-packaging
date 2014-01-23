@@ -1,2 +1,2 @@
 #!/bin/sh
-chown -R pi /usr/share/pipresents/pp_home
+chown -R pi /usr/share/pipresents
