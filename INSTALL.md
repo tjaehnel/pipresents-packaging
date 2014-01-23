@@ -8,11 +8,12 @@ Installation of pipresents-rsync
 
 
 # Operations to install and configure the package #
+*   Make sure your raspberry pi start into X (raspi-config)
 *   Upload the debian package to the Raspberry Pi and install it as root
         # dpkg -i pipresenrs-rsync_<version>.deb
 *   The command might fail with a list of unresolved dependencies. If so, execute the following command and then try installation again.
         # apt-get -f install
-*   Configure remote server access in /etc/default/pipresents
+*   Configure remote server access in /etc/default/pipresents-rsync
 *   Generate keypair (if necessary) and put files into the correct directories (see below)
 *   Make sure you are able to login to the remote SSH server without password
         # ssh -l <remote username> <ssh server>

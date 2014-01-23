@@ -13,7 +13,7 @@
 # Author: Tobias Jaehnel <tjaehnel@gmail.com>
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Display package for museums & visitor centres"             
-NAME=pipresents
+NAME=pipresents-rsync
 DAEMON=/usr/share/pipresents/pipresents
 PYTHONEXEC=$(type python | cut --fields=3 -d ' ')
 
@@ -40,6 +40,9 @@ WAITFORX_SLEEPBETWEENRETRIES=1
 # Define LSB log_* functions.
 # Depend on lsb-base (>= 3.0-6) to ensure that this file is present.
 . /lib/lsb/init-functions
+
+# run script only if START_DAMON is 'yes'
+[ "$START_DAEMON" = "yes" ] || exit 0
 
 DAEMON_ARGS="-f bottom -b -o $PPHOME -p $PROFILE -d"
 CHDIR=$PROFILEDIR/$PROFILE

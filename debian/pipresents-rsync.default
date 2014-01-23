@@ -1,6 +1,9 @@
 # Defaults for pipresents initscript
 # sourced by /etc/init.d/pipresents
 
+# Set to yes to enable pipresents
+START_DAEMON=no
+
 # Hostname or IP address of the rsync capable SSH server
 RSYNC_SSH_HOST=mysshhost.net
 # Username on the SSH server
