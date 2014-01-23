@@ -19,5 +19,6 @@ dpkg-genchanges: including full source code in upload
  dpkg-source --after-build pipresents-rsync-1.1.2b
 dpkg-buildpackage: full upload (original source is included)
 Now running lintian...
+W: pipresents-rsync source: maintainer-script-lacks-debhelper-token debian/postinst
 W: pipresents-rsync source: newer-standards-version 3.9.5 (current is 3.9.4)
 Finished running lintian.

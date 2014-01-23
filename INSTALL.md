@@ -18,6 +18,7 @@ Installation of pipresents-rsync
 *   Make sure you are able to login to the remote SSH server without password
         # ssh -l <remote username> <ssh server>
     Perform this as user pi, NOT as root(!!).
+    You HAVE TO do this once to accept the host key
 After restarting your Raspberry Pi it gets the presentation from the rsync server and runs it. It also check for updates if your show every minute.
 
 # Creating a keypair for passwordless SSH login #
