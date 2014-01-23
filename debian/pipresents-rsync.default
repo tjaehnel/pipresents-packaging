@@ -1,10 +1,17 @@
 # Defaults for pipresents initscript
 # sourced by /etc/init.d/pipresents
 
-PROFILE=show1
-
+# Hostname or IP address of the rsync capable SSH server
 RSYNC_SSH_HOST=mysshhost.net
+# Username on the SSH server
+# (certificate based login without password must be
+# enabled and configured for this user)
 RSYNC_SSH_USER=mysshuser
-RSYNC_REMOTE_DIR=/path/to/$PROFILE
+# Absolute path to the directory on the SSH server
+# where your shows (profiles) are stored
+RSYNC_REMOTE_DIR=/path/to/profiles
 
+# Name of the show (profile) to be fetched and displayed
+# Must be a subdirectory of $RSYNC_REMOTE_DIR
+PROFILE=myshow
 
