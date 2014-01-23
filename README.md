@@ -1,6 +1,8 @@
 PI PRESENTS PACKAGING
 =====================
 
+For instructions how to install and configure the debian package, see INSTALL.md
+
 This project is used to create a debian package (.deb) for the pipresents software (https://github.com/KenT2/pipresents). This debian package can be installed on a Raspberry Pi.
 
 It includes a init script and creates an example configuration file located in /etc/default/pipresents
