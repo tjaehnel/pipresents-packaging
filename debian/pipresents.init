@@ -15,7 +15,7 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Display package for museums & visitor centres"             
 NAME=pipresents
 #DAEMON=/usr/share/pipresents/pipresents
-DAEMON=/usr/share/pipresents/pipresents
+DAEMON=/home/pi/pipresents/pipresents/pipresents
 PYTHONEXEC=$(type python | cut --fields=3 -d ' ')
 
 PIDFILE=/var/run/$NAME.pid
@@ -223,15 +223,15 @@ case "$1" in
     if [ $FILES_CHANGED -eq 1 ]
     then
         log_success_msg "Files changed during update, restarting PiPresents"
-        stop
-        start
+        do_stop
+        do_start
     else
         log_success_msg "No files changed - exiting"
     fi
     ;;
 
   *)
-    echo "Usage: $SCRIPTNAME {start|stop|status|restart|force-reload}" >&2
+    echo "Usage: $SCRIPTNAME {start|stop|status|restart|fetch|update|force-reload}" >&2
     exit 3
     ;;
 esac
