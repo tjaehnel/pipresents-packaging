@@ -1,4 +1,4 @@
-/pipresents_*.orig.tar.gz
-/pipresents-*
+/pipresents-rsync_*.orig.tar.gz
+/pipresents-rsync-*
 /binary-package/
 
