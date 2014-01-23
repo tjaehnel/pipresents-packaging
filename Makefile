@@ -1,9 +1,10 @@
 TARBALLURL=https://github.com/KenT2/pipresents/tarball/master
+PACKAGENAME=pipresents-rsync
 PIPVERSION=1.1.2b
 PACKAGEREVISION=1
 
-PIPSRCTARBALL=pipresents_${PIPVERSION}.orig.tar.gz
-PIPSRCDIR=pipresents-rsync-${PIPVERSION}
+PIPSRCTARBALL=${PACKAGENAME}_${PIPVERSION}.orig.tar.gz
+PIPSRCDIR=${PACKAGENAME}-${PIPVERSION}
 
 .PHONY: download prepare-package extract-source-package source-package binary-package clean
 download:
@@ -23,27 +24,27 @@ prepare-package:
 	@echo "-------- Now make changes to ${PIPSRCDIR} if necessary -----------"
 
 extract-source-package:
-	dpkg-source -x source-package/pipresents_${PIPVERSION}.dsc ${PIPSRCDIR}
+	dpkg-source -x source-package/${PACKAGENAME}_${PIPVERSION}-${PACKAGEREVISION}.dsc ${PIPSRCDIR}
 
 source-package:
 	cd ${PIPSRCDIR} && debuild -us -uc -S
 	-rm -r source-package
 	mkdir source-package
-	mv pipresents_* source-package
+	mv ${PACKAGENAME}_* source-package
 	cp source-package/${PIPSRCTARBALL} .
 
 # build binary package from source package
 binary-package:
-	dpkg-source -x source-package/pipresents-rsync_${PIPVERSION}-${PACKAGEREVISION}.dsc tmp
+	dpkg-source -x source-package/${PACKAGENAME}_${PIPVERSION}-${PACKAGEREVISION}.dsc tmp
 	cd tmp && debuild -us -uc -b 
 	-rm -r binary-package
 	mkdir binary-package
-	mv pipresents_* binary-package
+	mv ${PACKAGENAME}_* binary-package
 	cp binary-package/${PIPSRCTARBALL} .
 	rm -rf tmp
 
 clean:
-	-rm pipresents_*
+	-rm ${PACKAGENAME}_*
 	-rm -r ${PIPSRCDIR}
 	-rm -r binary-package
 	-rm -rf tmp
