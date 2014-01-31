@@ -59,7 +59,8 @@ VERBOSE=yes
 #   2 if there was an error
 #
 fetch_profiles() {
-    CHANGED_FILES=$(su $PIPUSER -c "$UPDATE_PROFILES_COMMAND | head -n -3 | tail -n +2" )
+    echo "Executing: $UPDATE_PROFILES_COMMAND" >> /tmp/pipresents.log
+    CHANGED_FILES=$(su $PIPUSER -c "$UPDATE_PROFILES_COMMAND | tee -a /tmp/pipresents.log | head -n -3 | tail -n +2" 2>>/tmp/pipresents.log     )
     RETVAL=$?
     if [ $RETVAL -ne 0 ]
     then
