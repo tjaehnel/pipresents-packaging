@@ -38,4 +38,15 @@ After restarting your Raspberry Pi it gets the presentation from the rsync serve
 *   You should now be able to login to your remote server without password
         # ssh -l <remote username> <ssh server>
 
-If something goes wrong: There are logfiles in /tmp and /usr/share/pipresents
+### Troubleshooting ###
+If something goes wrong: There are logfiles in /tmp and /usr/share/pipresents which should give some basic information
+
+In case pipresents does not run on startup try the following AS ROOT:
+Manually run
+    # /etc/init.d/pipresents-rsync start
+and check /tmp/pipresents.log
+
+In case no automatic update is happening, manually run AS ROOT
+    # /etc/init.d/pipresents-rsync update
+and check /tmp/pipresents.log for error messages
+

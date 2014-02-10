@@ -27,6 +27,7 @@ PIPUSER=pi
 WAITFORX_RETRIES=20
 WAITFORX_SLEEPBETWEENRETRIES=1
 
+LOGFILE=/tmp/pipresents.log
 
 # Exit if the package is not installed
 [ -x $DAEMON ] || exit 0
@@ -51,6 +52,9 @@ UPDATE_PROFILES_COMMAND="rsync -ave ssh --delete $RSYNC_SSH_USER@$RSYNC_SSH_HOST
 
 VERBOSE=yes
 
+touch $LOGFILE
+chmod 777 $LOGFILE
+
 #
 # Fetch current profiles from server
 # return
@@ -59,7 +63,8 @@ VERBOSE=yes
 #   2 if there was an error
 #
 fetch_profiles() {
-    CHANGED_FILES=$(su $PIPUSER -c "$UPDATE_PROFILES_COMMAND | head -n -3 | tail -n +2" )
+    echo "Executing: $UPDATE_PROFILES_COMMAND" >> $LOGFILE
+    CHANGED_FILES=$(su $PIPUSER -c "$UPDATE_PROFILES_COMMAND | tee -a $LOGFILE | head -n -3 | tail -n +2" 2>>$LOGFILE)
     RETVAL=$?
     if [ $RETVAL -ne 0 ]
     then
