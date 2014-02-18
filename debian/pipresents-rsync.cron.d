@@ -1,2 +1,2 @@
-* * * * * root /etc/init.d/pipresents update >> /tmp/pipresents-update.log
+* * * * * root /etc/init.d/pipresents-rsync update >> /tmp/pipresents-update.log
 
