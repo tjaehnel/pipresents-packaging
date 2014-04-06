@@ -1,6 +1,9 @@
 PI PRESENTS PACKAGING
 =====================
 
+NOTE: This branch has never really been tested, because it is not used in our setup.
+Please checkout the rsync branch, which has additional support for fetching presentation data from an rsync server.
+
 This project is used to create a debian package (.deb) for the pipresents software (https://github.com/KenT2/pipresents). This debian package can be installed on a Raspberry Pi.
 
 It includes a init script and creates an example configuration file located in /etc/default/pipresents
